@@ -5,6 +5,9 @@
     "@mui/icons-material": "^5.15.1",
     "@mui/material": "^5.15.1",
     "bootstrap": "^5.3.2",
+    "firebase-tools": "^13.0.2",
+    "google-auth-library": "^9.4.1",
+    "googleapis": "^129.0.0",
     "react-router-dom": "^6.21.0"
   }
 }
