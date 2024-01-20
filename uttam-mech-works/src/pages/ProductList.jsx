@@ -1,62 +1,73 @@
-// ProductList.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Typography, Grid } from '@mui/material';
-import ProductCard from '../components/ProductCard';  // Import the ProductCard component
-import { fetchData } from '../components/GoogleSheetsApi';
-// const products = [
-//   {
-//     id: 1,
-//     name: 'Product 1',
-//     description: 'Description of Product 1',
-//     price: 29.99,
-//     image: 'https://www.steelforging.org/wp-content/uploads/2017/12/forging.jpg',
-//   },
-// ];
-
-
+import ProductCard from '../components/ProductCard';
+import FetchCSVData from '../components/GoogleSheetsApi';
+import Papa from 'papaparse';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const ProductList = () => {
-
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchDataAsync = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchData();
-        setProducts(data || []);
-      } catch (error) {
-        setError(error.message || 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
+    useEffect(() => {
+      const fetchDataAsync = async () => {
+          try {
+              setLoading(true);
+              const csvData = await FetchCSVData();
+  
+              const parseResult = await new Promise((resolve, reject) => {
+                  Papa.parse(csvData, {
+                      header: true,
+                      complete: function (result) {
+                          resolve(result.data);
+                      },
+                      error: function (error) {
+                          reject(error.message);
+                      },
+                  });
+              });
 
-    fetchDataAsync();
-  }, []);
+              setProducts(parseResult);
+          } catch (error) {
+              console.error('Error fetching/parsing data:', error);
+              setError('An error occurred while fetching/parsing the data');
+          } finally {
+              setLoading(false);
+          }
+      };
+  
+      fetchDataAsync();
+  }, []); // Empty dependency array to run the effect only once on mount
+  
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    if (loading) {
+        return <LoadingSpinner />; 
+    }
 
-  return (
-    <Container>
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+    return (
+      <Container>
       <Typography variant="h4" align="center" gutterBottom>
-        Our Products
+          Our Products
       </Typography>
       <Grid container spacing={2}>
-        {products.map((row, index) => (
-          <li key={index}>{row.join(', ')}</li>
-        ))}
+          {products.map((product) => (
+              
+            <>
+            <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+              <ProductCard product={product} />
+            </Grid>
+            </>
+            
+          ))}
       </Grid>
-    </Container>
-  );
+  </Container>
+    );
 };
 
 export default ProductList;

@@ -1,0 +1,65 @@
+.about-data{
+    height: 20%;
+}
+p{
+    text-align: justify;
+}
+
+img{
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+/* Style for the section with three columns */
+.row.container-fluid {
+    margin-top: 20px;
+  }
+  
+  .col-sm {
+    margin-bottom: 20px;
+  }
+  
+  /* Common style for each column */
+  .about-section {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .about-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .about-section p {
+    font-size: 1em;
+  }
+  
+  /* Image styling */
+  .about-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  /* Responsive styling for small screens */
+  @media (max-width: 767px) {
+    .about-section {
+      padding: 15px;
+    }
+  
+    .about-section h2 {
+      font-size: 1.2em;
+      margin-bottom: 8px;
+    }
+  
+    .about-section p {
+      font-size: 0.9em;
+    }
+  }
+  

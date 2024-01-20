@@ -27,15 +27,12 @@ const Contact = () => {
           <Typography variant="h2" gutterBottom>
             Contact Us
           </Typography>
-          <Typography variant="body1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
-          </Typography>
           {/* Add other components as needed */}
         </Container>
     </div>
 
     <div>
-        <Container>
+    <Container style={{ marginTop: "20px", marginBottom: "20px", textAlign: "center" }}>
       <Typography variant="h6" align="center" gutterBottom>
         Have any Queries? Feel free to get in touch with us.
       </Typography>
@@ -43,7 +40,8 @@ const Contact = () => {
       <Typography variant="h4" align="center" gutterBottom>
         Feel free to contact us any time
       </Typography>
-      <form onSubmit={handleSubmit}>
+
+      <form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField

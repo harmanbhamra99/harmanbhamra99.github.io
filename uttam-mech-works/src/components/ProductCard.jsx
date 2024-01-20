@@ -1,26 +1,42 @@
-// ProductCard.js
-import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
+  const [hovered, setHovered] = useState(false);
+
+  const cardStyle = {
+    position: 'relative',
+    overflow: 'hidden',
+    transition: 'transform 0.3s ease',
+    transform: hovered ? 'scale(1.1)' : 'scale(1)',
+  };
+
+  const imageStyle = {
+    width: '100%',
+    height: '250px', // Set a fixed height for all images
+    display: 'block',
+    transition: 'transform 0.3s ease',
+  };
+
   return (
-    <Card>
-      <CardMedia
-        component="img"
-        height="140"
-        image={product.image}  // Replace with your product image URL
-        alt={product.name}
-      />
-      <CardContent>
-        <Typography variant="h6">{product.name}</Typography>
-        <Typography variant="body2" color="textSecondary">{product.description}</Typography>
-        <Typography variant="h6">${product.price}</Typography>
-        <Button variant="contained" color="primary">
-          View Details
-        </Button>
-      </CardContent>
-    </Card>
+    <div
+      style={cardStyle}
+      className="product-card"
+      onMouseOver={() => setHovered(true)}
+      onMouseOut={() => setHovered(false)}
+    >
+      <Link to="/contact">
+        <img
+          src={product.Image}
+          alt={product.Name}
+          className="product-image"
+          style={imageStyle}
+        />
+      </Link>
+      <div className="product-details">
+        <h6 className="product-name">{product.Name}</h6>
+      </div>
+    </div>
   );
 };
 

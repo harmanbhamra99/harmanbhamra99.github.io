@@ -1,93 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  Button,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import "./nav.css"
 
-const MaterialNavbarWithLinks = () => {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+const Navbar = () => {
+  const [isNavbarCollapsed, setIsNavbarCollapsed] = useState(true);
 
-  const handleMobileMenuOpen = () => {
-    setMobileMenuOpen(true);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      // Check the window width and set the state accordingly
+      setIsNavbarCollapsed(window.innerWidth <= 768);
+    };
 
-  const handleMobileMenuClose = () => {
-    setMobileMenuOpen(false);
-  };
+    // Initial check on component mount
+    handleResize();
 
-  const MobileMenu = (
-    <Drawer anchor="right" open={isMobile && isMobileMenuOpen} onClose={handleMobileMenuClose}>
-      <List>
-        <ListItem button component={Link} to="/">
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button component={Link} to="/about">
-          <ListItemText primary="About" />
-        </ListItem>
-        <ListItem button component={Link} to="/products">
-          <ListItemText primary="Products" />
-        </ListItem>
-        <ListItem button component={Link} to="/contact">
-          <ListItemText primary="Contact" />
-        </ListItem>
-        {/* Add more menu items as needed */}
-      </List>
-    </Drawer>
-  );
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <>
-      <AppBar position="sticky" color="primary">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Your Logo
-          </Typography>
-          {isMobile && (
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={handleMobileMenuOpen}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-          {!isMobile && (
-            <>
-              <Button color="inherit" component={Link} to="/">
-                Home
-              </Button>
-              <Button color="inherit" component={Link} to="/about">
-                About
-              </Button>
-              <Button color="inherit" component={Link} to="/products">
-                Products
-              </Button>
-              <Button color="inherit" component={Link} to="/contact">
-                Contact
-              </Button>
-            </>
-          )}
-          
-        </Toolbar>
-      </AppBar>
-      {MobileMenu}
-    </>
+    <nav className="navbar navbar-dark navbar-scroll navbar-expand-lg company-navbar" aria-label="Main">
+      <div className="container">
+        <Link className="navbar-brand d-inline-flex text-uppercase" to="/">
+          UMW <i className="material-icons ms-2" aria-hidden="true">donut_large</i>
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar"
+          aria-controls="navbar"
+          aria-expanded={!isNavbarCollapsed}
+          aria-label="Toggle navigation"
+          onClick={() => setIsNavbarCollapsed(!isNavbarCollapsed)}
+        >
+          <i className="material-icons icon-2x" aria-hidden="true">menu</i>
+        </button>
+        <div className={`collapse navbar-collapse text-uppercase ${isNavbarCollapsed ? '' : 'show'}`} id="navbar">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/about">About</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/products">Products</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact">Contact</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
-};
+}
 
-export default MaterialNavbarWithLinks;
+export default Navbar;
