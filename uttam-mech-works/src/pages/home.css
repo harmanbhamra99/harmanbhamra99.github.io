@@ -7,6 +7,22 @@
     color: black;
   }
 
+  @media (max-width: 400px) {
+    /* Add specific styles for screens with a width of 400 pixels or less */
+    .container-fluid.general-div h2 {
+      padding-top: 20%; /* Adjust font size as needed */
+    }
+
+    .container-fluid.prod-div h2 {
+        padding-top: 15%; /* Adjust font size as needed */
+      }
+    
+    .container-fluid.all-products {
+        padding-top: 25%; /* Adjust font size as needed */
+      }
+
+  }
+
 .container-fluid.product-div {
     height: 50vh;
     

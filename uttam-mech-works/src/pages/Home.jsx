@@ -46,7 +46,7 @@ const Home = () => {
       <h2>Our Products</h2>
       </div>
       
-      <div className="container-fluid pt-2 pb-5 pb-lg-6">
+      <div className="container-fluid pt-2 pb-5 pb-lg-6 all-products">
         <ul className="row list-unstyled gx-0 gy-4 mt-n6 px-xl-4">
           <li className="col-sm-6 col-xl-4">
             <figure className="img-scale">

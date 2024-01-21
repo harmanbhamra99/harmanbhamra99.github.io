@@ -37,10 +37,10 @@ const Footer = () => {
             {/* Company Section */}
             <h5 className="text-black mb-3">Company</h5>
             <ul className="list-unstyled list-py-1 mb-0">
-              <li><Link className="text-decoration-none text-black" to="#">About</Link></li>
-              <li><Link className="text-decoration-none text-black" to="#">Our Products </Link></li>
-              <li><Link className="text-decoration-none text-black" to="#">Blog</Link></li>
-              <li><Link className="text-decoration-none text-black" to="#">Contact</Link></li>
+              <li><Link className="text-decoration-none text-black" to="/about">About</Link></li>
+              <li><Link className="text-decoration-none text-black" to="/products">Our Products </Link></li>
+              <li><Link className="text-decoration-none text-black" to="/about">Blog</Link></li>
+              <li><Link className="text-decoration-none text-black" to="/contact">Contact</Link></li>
               <li style={{ fontWeight: "bold" }}>Open Hours:</li>
               <li style={{ fontSize: "0.85em" }}>Mon–Sat: 08:00 am to 08:00 pm,</li>
               <li style={{ fontSize: "0.85em" }}>Sun: 8:00 am to 12:00 pm</li>

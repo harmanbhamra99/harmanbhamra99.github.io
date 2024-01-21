@@ -7,26 +7,26 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      // Check the window width and set the state accordingly
       setIsNavbarCollapsed(window.innerWidth <= 768);
     };
 
-    // Initial check on component mount
     handleResize();
 
-    // Add event listener for window resize
     window.addEventListener('resize', handleResize);
 
-    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
+  const closeNavbar = () => {
+    setIsNavbarCollapsed(true);
+  };
+
   return (
     <nav className="navbar navbar-dark navbar-scroll navbar-expand-lg company-navbar" aria-label="Main">
       <div className="container">
-        <Link className="navbar-brand d-inline-flex text-uppercase" to="/">
+        <Link className="navbar-brand d-inline-flex text-uppercase" to="/" onClick={closeNavbar}>
           UMW <i className="material-icons ms-2" aria-hidden="true">donut_large</i>
         </Link>
         <button
@@ -44,16 +44,24 @@ const Navbar = () => {
         <div className={`collapse navbar-collapse text-uppercase ${isNavbarCollapsed ? '' : 'show'}`} id="navbar">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link" to="/" onClick={closeNavbar}>
+                Home
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
+              <Link className="nav-link" to="/about" onClick={closeNavbar}>
+                About
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/products">Products</Link>
+              <Link className="nav-link" to="/products" onClick={closeNavbar}>
+                Products
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
+              <Link className="nav-link" to="/contact" onClick={closeNavbar}>
+                Contact
+              </Link>
             </li>
           </ul>
         </div>
